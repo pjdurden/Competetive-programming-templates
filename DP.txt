@@ -1,0 +1,24 @@
+TSP(recursive)
+int dp[15][ (1<<11) -1 ];
+int posx[15];
+int posy[15];
+int n,m,sz;
+
+int solution(int pos,int mask)
+{
+    if(mask == ((1<<sz)-1) )
+        return abs(posx[pos]-posx[0])+abs(posy[pos]-posy[0]);
+    if(dp[pos][mask]!=-1)return dp[pos][mask];
+    int temp=INT_MAX;
+    for(int i=0;i<sz;i++)
+    {
+        if(!chmask(i,mask))
+        {
+            int dist=abs(posx[pos]-posx[i])+abs(posy[pos]-posy[i]);
+            temp=min(temp,dist+solution(i,mask|(1<<i)));
+        }
+    }
+
+    return dp[pos][mask]=temp;
+}
+
